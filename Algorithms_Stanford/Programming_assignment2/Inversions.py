@@ -1,14 +1,18 @@
 # !/user/bin/env python3
 #-*- coding:utf-8 -*-
 # count inversions including sorting
+
+# read the list
 def read(filename='IntegerArray.txt'):
     with open(filename,'r') as f:
         s=f.readlines()
     return list(map(int,s))
 
+# count the total number of inversions
 def count(a):
     return counting(a,0,len(a)-1)
 
+# count the number of inversions in list a[low,high+1]
 def counting(a, low, high):
     if high<=low:
         return 0
@@ -20,6 +24,7 @@ def counting(a, low, high):
     z=countsplit(a,low,mid,high)
     return x+y+z
 
+# count the number of inversions that two number in a[low,mid] and a[mid+1,high] respectively
 def countsplit(a,low,mid,high):
     aux=[i for i in a[low:high+1]]
     i,j,num,lr=0,mid-low+1,0,0
@@ -34,13 +39,16 @@ def countsplit(a,low,mid,high):
             a[k],i,num=aux[i],i+1,num+lr
     return num
 
+# client
 def client():
     data=read('IntegerArray.txt')
     num=count(data)
     #print('The sorted array is \n%8s'%data)
     print('The number of inversions is %d'%num)
 
-client()
+# test
+if __name__=='__main__':
+    client()
 
 
 

@@ -3,6 +3,7 @@
 # min cuts
 import random as r
 
+# read the graph
 def read(filename):
     with open(filename,'r') as f:
         lines=f.readlines()
@@ -12,6 +13,7 @@ def read(filename):
         data.append(list(map(int,temp)))
     return data
 
+# compute the mincut
 class Mincut(object):
     def __init__(self, data):
         self.unvariable=data
@@ -52,6 +54,7 @@ class Mincut(object):
             self.data=[[x for x in line] for line in self.unvariable]
         return res,mini
 
+# client
 def client(times):
     data=read('kargerMinCut.txt')
     test=Mincut(data)
@@ -61,7 +64,9 @@ def client(times):
         print("The remaining nodes are %s, The cuts are %d"%(cuts[:2],cuts[2]))
     print('The final minimum cut is %d'%num)
 
-client(50)
+# test
+if __name__=='__main__':
+    client(50)
 
 
 
