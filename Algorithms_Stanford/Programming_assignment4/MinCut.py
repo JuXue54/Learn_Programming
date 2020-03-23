@@ -18,40 +18,39 @@ class Mincut(object):
     def __init__(self, data):
         self.unvariable=data
         self.nodes = len(data)
-        self.data=[[x for x in line] for line in data]
+        self.data={line[0]:set(line[1:]) for line in data}
+        self.edges=0
     # return two random nodes of an edge
     def rand(self):
-        nodeid=r.randint(0,self.nodes-1)
-        node=r.choice(self.data[nodeid][1:])
-        return nodeid,node
+        nodeA=r.choice(list(self.data.keys()))    #delete the node
+        nodeB=r.choice(list(self.data[nodeA]))    #delte the edge nodeB-nodeA
+        return nodeA,nodeB
     # merge two random nodes
-    def merge(self,nodeid,node):
-        nodeh=self.data[nodeid][0]
-        self.data=[[node]+[x for x in (line+self.data[nodeid]) if x!=node and x!=nodeh] if line[0]==node else [x if x!=nodeh else node for x in line] for line in self.data]
-        self.data.pop(nodeid)
+    def merge(self,nA,nB):
+        self.edges+=len(self.data[nA] & self.data[nB])
+        self.data={key:(value|self.data[nA])-{nA,nB} if key==nB else ((value|{nB})-{nA} if nA in value else value) for key,value in self.data.items()}
+        self.data.pop(nA)
         self.nodes-=1
     # deleting random nodes until there are only two nodes
     def deleting(self,seed):
         r.seed(seed)
         while(self.nodes>2):
-            nodeid,node=self.rand()
-            self.merge(nodeid,node)
-        if self.data[0][0]!=self.data[1][1] or self.data[0][1]!=self.data[1][0] or len(self.data[0])!=len(self.data[1]):
-            raise ValueError('something is wrong')
-        num=len(self.data[0])-1
-        result=[self.data[0][0],self.data[1][0],num]
-        return result
+            nA,nB=self.rand()
+            self.merge(nA,nB)
+        num=self.edges
+        return self.data.keys(),num
     # get the result
     def get(self,times):
         mini=200
         res=[]
         for i in range(times):
-            n=self.deleting(i*11)
-            if n[2]<mini:
-                mini=n[2]
-            res.append(n)
+            nodes,n=self.deleting(i*11)
+            if n<mini:
+                mini=n
+            res.append((nodes,n))
             self.nodes = len(self.unvariable)
-            self.data=[[x for x in line] for line in self.unvariable]
+            self.data={line[0]:set(line[1:]) for line in self.unvariable}
+            self.edges=0
         return res,mini
 
 # client
@@ -61,7 +60,7 @@ def client(times):
     results,num=test.get(times)
     print('The cuts include:')
     for cuts in results:
-        print("The remaining nodes are %s, The cuts are %d"%(cuts[:2],cuts[2]))
+        print("The remaining nodes are %s, The cuts are %d"%(cuts[0],cuts[1]))
     print('The final minimum cut is %d'%num)
 
 # test
