@@ -13,60 +13,58 @@ def read(filename):
         data.append(list(map(int,temp)))
     return data
 
-# compute the mincut
-class Mincut(object):
-    def __init__(self, data):
-        self.unvariable=data
-        self.nodes = len(data)
-        self.data={line[0]:set(line[1:]) for line in data}
-        self.edges=0
-    # return two random nodes of an edge
-    def rand(self):
-        nodeA=r.choice(list(self.data.keys()))    #delete the node
-        nodeB=r.choice(list(self.data[nodeA]))    #delte the edge nodeB-nodeA
-        return nodeA,nodeB
-    # merge two random nodes
-    def merge(self,nA,nB):
-        self.edges+=len(self.data[nA] & self.data[nB])
-        self.data={key:(value|self.data[nA])-{nA,nB} if key==nB else ((value|{nB})-{nA} if nA in value else value) for key,value in self.data.items()}
-        self.data.pop(nA)
+# A graph structure and BFS
+class Graph(object):
+    # create a graph
+    def __init__(self,data):
+        self.G={line[0]:set(line[1:]) for line in data}
+        self.nodes=len(self.G)
+        self.A=set()
+        self.E={(key,node):1 for key,value in self.G.items() for node in value}
+        self.omega={x:0 for x in set(self.G.keys())}
+    def BFS(self):
+        while len(self.A)<self.nodes-1:
+            u=max(self.omega,key=self.omega.get)
+            for key,value in self.omega.items():
+                if key in self.G[u] and not (key in self.A):
+                    self.omega[key]=value+self.E[(key,u)]
+            self.A.add(u)
+            self.omega.pop(u)
+        return u,self.A.pop()
+    def merge(self,u,v):
+        for node in (self.G[u] & self.G[v]):
+            self.E[(node,u)]+=self.E[(node,v)]
+            self.E[(u,node)]+=self.E[(v,node)]
+        for node in (self.G[v]-self.G[u]):
+            self.E[(node,u)]=self.E[(node,v)]
+            self.E[(u,node)]=self.E[(v,node)]
+        for node in self.G[v]:
+            self.E.pop((node,v))
+            self.E.pop((v,node))
+        if (u,v) in self.E:
+            self.E.pop((u,v))
+            self.E.pop((v,u))
+        self.G={key:(value|self.G[v])-{u,v} if key==u else ((value|{u})-{v} if v in value else value) for key,value in self.G.items()}
+        self.G.pop(v)
         self.nodes-=1
-    # deleting random nodes until there are only two nodes
-    def deleting(self,seed):
-        r.seed(seed)
-        while(self.nodes>2):
-            nA,nB=self.rand()
-            self.merge(nA,nB)
-        num=self.edges
-        return self.data.keys(),num
-    # get the result
-    def get(self,times):
-        mini=200
-        res=[]
-        for i in range(times):
-            nodes,n=self.deleting(i*11)
-            if n<mini:
-                mini=n
-            res.append((nodes,n))
-            self.nodes = len(self.unvariable)
-            self.data={line[0]:set(line[1:]) for line in self.unvariable}
-            self.edges=0
-        return res,mini
+        self.A=set()
+        self.omega={x:0 for x in set(self.G.keys())}
+    def client(self):
+        while self.nodes>2:
+            u,v=self.BFS()
+            self.merge(u,v)
+        return self.E
 
 # client
-def client(times):
+def main():
     data=read('kargerMinCut.txt')
-    test=Mincut(data)
-    results,num=test.get(times)
-    print('The cuts include:')
-    for cuts in results:
-        print("The remaining nodes are %s, The cuts are %d"%(cuts[0],cuts[1]))
-    print('The final minimum cut is %d'%num)
+    test=Graph(data)
+    mincut=test.client()
+    print('The cuts is %s:'%mincut)
 
 # test
 if __name__=='__main__':
-    client(50)
-
+    main()
 
 
 
