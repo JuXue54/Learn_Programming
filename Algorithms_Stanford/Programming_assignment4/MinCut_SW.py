@@ -1,6 +1,8 @@
 # !/user/bin/env python3
 #-*- coding:utf-8 -*-
 # min cuts
+import time
+from MinCut_Kar import Mincut
 
 # read the graph
 def read(filename):
@@ -16,6 +18,7 @@ def read(filename):
 class Graph(object):
     # create a graph
     def __init__(self,data):
+        self.__number=len(data)
         self.__G={line[0]:set(line[1:]) for line in data}
         self.__nodes=len(self.__G)
         self.__A=set()
@@ -64,16 +67,27 @@ class Graph(object):
             self.merge(u,v)
             if self.__omega[v]<cut:
                 cut=self.__omega[v]
+                A={x for x in self.__A}
+                B={x for x in set(range(1,self.__number+1)) if not x in A}
             self.__A=set()
             self.__omega={x:0 for x in set(self.__G.keys())}
-        return cut
+        return [A,B],cut
 
 # client
 def main():
     data=read('kargerMinCut.txt')
+    start1=time.process_time()
     test=Graph(data)
-    mincut=test.client()
-    print('The cuts is %s'%(mincut))
+    cutset,num=test.client()
+    end1=time.process_time()
+    print('Stoer-Wagner:\nThe cut sets are: %s\nThe minimum cut is %d'%(cutset,num))
+    print('CPU time for Stoer-Wagner:%f'%(end1-start1))
+    start2=time.process_time()
+    test=Mincut(data)
+    cutset,num=test.get(50)
+    end2=time.process_time()
+    print('Karger:\nThe cut sets are: %s\nThe minimum cut is %d'%(cutset,num))
+    print('CPU time for Karger:%f'%(end2-start2))
 
 # test
 if __name__=='__main__':
