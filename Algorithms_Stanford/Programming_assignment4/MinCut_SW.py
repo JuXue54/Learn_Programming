@@ -2,7 +2,7 @@
 #-*- coding:utf-8 -*-
 # min cuts
 import time
-from MinCut_Kar import Mincut
+from MinCut_Kar import Mincut_kar
 
 # read the graph
 def read(filename):
@@ -15,7 +15,7 @@ def read(filename):
     return data
 
 # A graph structure and BFS
-class Graph(object):
+class Mincut_SW(object):
     # create a graph
     def __init__(self,data):
         self.__number=len(data)
@@ -60,7 +60,7 @@ class Graph(object):
         self.__G={key:(value|self.__G[v])-{u,v} if key==u else ((value|{u})-{v} if v in value else value) for key,value in self.__G.items()}
         self.__G.pop(v)
         self.__nodes-=1
-    def client(self):
+    def getCut(self):
         cut=float('inf')
         while self.__nodes>2:
             u,v=self.BFS()
@@ -77,14 +77,14 @@ class Graph(object):
 def main():
     data=read('kargerMinCut.txt')
     start1=time.process_time()
-    test=Graph(data)
-    cutset,num=test.client()
+    test=Mincut_SW(data)
+    cutset,num=test.getCut()
     end1=time.process_time()
     print('Stoer-Wagner:\nThe cut sets are: %s\nThe minimum cut is %d'%(cutset,num))
     print('CPU time for Stoer-Wagner:%f'%(end1-start1))
     start2=time.process_time()
-    test=Mincut(data)
-    cutset,num=test.get(50)
+    test=Mincut_kar(data)
+    cutset,num=test.getCut(50)
     end2=time.process_time()
     print('Karger:\nThe cut sets are: %s\nThe minimum cut is %d'%(cutset,num))
     print('CPU time for Karger:%f'%(end2-start2))

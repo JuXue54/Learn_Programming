@@ -14,7 +14,7 @@ def read(filename):
     return data
 
 # compute the mincut
-class Mincut(object):
+class Mincut_kar(object):
     def __init__(self, data):
         self.unvariable=data
         self.nodes = len(data)
@@ -51,7 +51,7 @@ class Mincut(object):
         num=len(self.data[0])-1
         return [A,B,num]
     # get the result
-    def get(self,times):
+    def getCut(self,times):
         mini=2**10
         res=[]
         for i in range(times):
@@ -65,16 +65,16 @@ class Mincut(object):
         return res,mini
 
 # client
-def client(times):
+def main(times):
     data=read('kargerMinCut.txt')
-    test=Mincut(data)
-    results,num=test.get(times)
+    test=Mincut_kar(data)
+    results,num=test.getCut(times)
     print('The cut sets are: %s'%results)
     print('The minimum cut is %d'%num)
 
 # test
 if __name__=='__main__':
-    client(50)
+    main(50)
 
 
 
