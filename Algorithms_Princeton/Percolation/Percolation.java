@@ -1,12 +1,16 @@
 
-/**The algorithm WeightedQuickUnionUF is used in this class. 
-*n*n+2 elements have been built and the index of element(row,col) is n(row-1)+col.
-*Two virtual elements were built in the top and bottom of the grids respectively.
+/*
 */
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-
+/**
+ * Percolation
+ * The algorithm WeightedQuickUnionUF is used in this class. 
+ * n*n+2 elements have been built and the index of element(row,col) is n(row-1)+col.
+ *  virtual elements were built in the top and bottom of the grids respectively.
+ * @author Jon Xue
+ */
 public class Percolation {
     private int numofopen; // the number of open site
     private int n; // n-by-n grid

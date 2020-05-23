@@ -3,7 +3,11 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
-
+/**
+ * KdTree
+ * Build a 2d-tree to store the points
+ * @author Jon Xue
+ */
 public class KdTree {
     private static final boolean red = true;
     private static final boolean blue = false;

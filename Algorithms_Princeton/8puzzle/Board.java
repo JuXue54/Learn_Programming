@@ -1,6 +1,11 @@
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * Board
+ * An n-by-n board with sliding tiles.
+ * @author Jon Xue
+ */
 public class Board {
     private final int[][] tiles;
     private final int n;

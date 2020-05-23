@@ -3,7 +3,11 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
-
+/**
+ * PointSET
+ * To use red-black tree to store the points
+ * @author Jon Xue
+ */
 public class PointSET {
     private SET<Point2D> tree;
 

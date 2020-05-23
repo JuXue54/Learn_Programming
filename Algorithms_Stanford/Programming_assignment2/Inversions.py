@@ -2,6 +2,8 @@
 #-*- coding:utf-8 -*-
 # count inversions including sorting
 
+__author__='Jon Xue'
+
 # read the list
 def read(filename='IntegerArray.txt'):
     with open(filename,'r') as f:

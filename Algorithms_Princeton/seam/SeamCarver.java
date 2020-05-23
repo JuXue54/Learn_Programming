@@ -1,7 +1,11 @@
 import edu.princeton.cs.algs4.Picture;
 import edu.princeton.cs.algs4.Queue;
-//import java.awt.Color;
 
+/**
+ * SeamCarver
+ * To resize the image by cutting insignificant seam
+ * @author Jon Xue
+ */
 public class SeamCarver {
     private int[][] rgb;
     private double[][] energy;

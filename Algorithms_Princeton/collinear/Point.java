@@ -1,6 +1,10 @@
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
 
+/**
+ * Point
+ * @author Jon Xue
+ */
 public class Point implements Comparable<Point> {
     private final int x;
     private final int y;

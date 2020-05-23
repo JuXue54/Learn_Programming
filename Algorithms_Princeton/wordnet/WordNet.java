@@ -4,7 +4,11 @@ import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.BreadthFirstDirectedPaths;
-
+/**
+ * WordNet
+ * To put the words into a digraph
+ * @author Jon Xue
+ */
 public class WordNet {
     private Digraph g;
     private ST<String, Bag<Integer>> st;

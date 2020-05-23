@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.Comparator;
-
+/**
+ * CircularSuffixArray
+ * @author Jon Xue
+ */
 public class CircularSuffixArray {
     private Integer[] index;
     private int length;

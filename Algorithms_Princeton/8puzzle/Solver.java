@@ -4,6 +4,11 @@ import edu.princeton.cs.algs4.In;
 import java.util.Comparator;
 import edu.princeton.cs.algs4.Stack;
 
+/**
+ * Solver
+ * Solve n-by-n slider puzzles
+ * @author Jon Xue
+ */
 public class Solver {
     //private final Comparator<Node> BY_HAM = new HamComparator();
     private final Comparator<Node> BY_MAN = new ManComparator();

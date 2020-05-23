@@ -1,7 +1,11 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.StdOut;
-
+/**
+ * BoggleSolver
+ * To find all valid words in a given boggle board
+ * @author Jon Xue
+ */
 public class BoggleSolver {
     private static final int R = 26;
     private Node root;

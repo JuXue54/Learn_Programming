@@ -3,6 +3,8 @@
 # min cuts
 import random as r
 
+__author__='Jon Xue'
+
 # read the graph
 def read(filename):
     with open(filename,'r') as f:

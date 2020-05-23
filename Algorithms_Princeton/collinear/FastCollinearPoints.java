@@ -3,6 +3,11 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * FastCollinearPoits
+ * To find line segments containing 4 or more points at a higher rate
+ * @author Jon Xue
+ */
 public class FastCollinearPoints {
     private Point[] points;
     private LineSegment[] res;

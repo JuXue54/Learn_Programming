@@ -3,6 +3,11 @@ import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * RandomizedQueue
+ * @author Jon Xue
+ * @param <Item>
+ */
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private int n;
     private Item[] s;

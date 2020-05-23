@@ -1,6 +1,9 @@
 import edu.princeton.cs.algs4.BinaryStdIn;
 import edu.princeton.cs.algs4.BinaryStdOut;
-
+/**
+ * BurrowsWheeler
+ * @author Jon Xue
+ */
 public class BurrowsWheeler {
     private static final int R = 256;
 

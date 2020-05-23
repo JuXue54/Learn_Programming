@@ -2,6 +2,11 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * Deque
+ * @author Jon Xue
+ * @param <Item>
+ */
 public class Deque<Item> implements Iterable<Item> {
     private Node<Item> first; // beginning of queue
     private Node<Item> last; // end of queue

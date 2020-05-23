@@ -4,6 +4,8 @@
 import time
 from MinCut_Kar import Mincut_kar
 
+__author__='Jon Xue'
+
 # read the graph
 def read(filename):
     with open(filename,'r') as f:

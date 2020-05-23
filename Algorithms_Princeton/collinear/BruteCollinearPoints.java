@@ -2,7 +2,11 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
-
+/**
+ * BruteCollinearPoints
+ * To find line segments containing only 4 points at a lower rate
+ * @author Jon Xue
+ */
 public class BruteCollinearPoints {
     private Point[] points;
     private LineSegment[] res;

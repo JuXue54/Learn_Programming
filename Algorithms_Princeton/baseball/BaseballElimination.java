@@ -4,7 +4,11 @@ import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
-
+/**
+ * BaseballElimination
+ * 
+ * @author Jon Xue
+ */
 public class BaseballElimination {
     private int n;
     private ST<String, Integer> team;
